@@ -1,54 +1,75 @@
 # Informe Técnico del Taller
 
 ## Nombre del Taller
-[Taller 6 Normatividad](https://github.com/Esteban7108/AREM-Taller_6_Normatividad)
+Taller 6 - Checklist de Cumplimiento Normativo
 
 ## Integrantes del equipo
-- Esteban Díaz
-- Juliana Moreno
+- Esteban Díaz Vargas
+- Katherin Juliana Moreno Carvajal
 
 ## Descripción general del trabajo
 
-El objetivo del taller fue verificar el cumplimiento normativo del sistema del cliente (GobData, un portal estatal de trámites ciudadanos) frente a los marcos de Habeas Data (Ley 1581 de 2012), ISO/IEC 27001, protección contra fugas de datos, y consentimiento/auditoría/roles de acceso. El equipo siguió la metodología de 5 pasos propuesta en la guía del taller: identificar datos sensibles, construir el checklist por categoría, evaluar el cumplimiento de cada ítem, documentar el riesgo de cada brecha detectada y priorizar las recomendaciones correctivas.
+El objetivo de esta Parte 2 fue verificar el cumplimiento normativo del sistema real del cliente — **Oasis Atelier Floral** — frente a los mismos marcos evaluados en clase sobre GobData: Habeas Data (Ley 1581 de 2012), ISO/IEC 27001, protección contra fugas de datos, y consentimiento/auditoría/roles de acceso, siguiendo la misma metodología de 5 pasos.
+
+La diferencia de partida es fundamental: GobData es un sistema estatal ya en producción, mientras que Oasis **todavía no tiene ningún sistema desplegado** — el "Sistema Oasis" evaluado aquí es la arquitectura objetivo ya definida en los Talleres 3 y 4. Este checklist, por tanto, no audita un sistema en funcionamiento sino que diagnostica **qué tan preparado está el diseño actual** frente a las obligaciones legales que aplicarán desde el día en que ese sistema entre en operación y empiece a procesar datos reales de clientes.
 
 ## Proceso de desarrollo
 
-Empezamos con la plantilla oficial en blanco (`plantilla_checklist.xlsx`), manteniendo la misma estructura. Primero se listaron los datos y procesos que maneja GobData (identificación, historial clínico, dirección, certificados digitales, trámites) y se asoció cada uno con la normativa que le aplica. Con esa base se construyeron 12 criterios de cumplimiento agrupados en seis categorías, y cada uno se evaluó como **Cumple** o **Parcial**, siempre respaldado por evidencia concreta observada en el sistema (por ejemplo, existencia de política de TI basada en ISO/IEC 27001:2013, o cifrado HTTPS/TLS en tránsito y reposo).
+Se reutilizó la estructura de 6 categorías de GobData (Consentimiento, Seguridad, Protección de Datos, Prevención de Fugas, Retención, Roles y Responsabilidades), pero **no se copió ni un solo ítem**: cada criterio se redactó y evaluó contra lo que efectivamente existe en el diseño de Oasis, documentado en los Talleres 3, 4 y 5.
 
-Los 5 ítems marcados como Parcial se llevaron a la hoja de Brechas Identificadas, donde a cada uno se le asignó un nivel de riesgo (Alto, Medio o Bajo) según el impacto de no corregirlo, y una recomendación prioritaria con su nivel de prioridad (Alta o Media). El equipo evitó el error común de confundir "Parcial" con "Brecha": el checklist solo registra el nivel de cumplimiento por ítem, mientras que la hoja de Brechas documenta el riesgo derivado de cada incumplimiento real.
+De los 13 criterios evaluados, solo 1 quedó en **Cumple** (cifrado en tránsito vía HTTPS, ya definido explícitamente en la arquitectura del Taller 3) y **12 en Parcial**. Esto no es un error de evaluación ni una tabla "genérica" — es el reflejo honesto de que Oasis está en fase de diseño, no de operación: casi ningún control de cumplimiento se ha formalizado todavía, porque el sistema que los necesitaría aún no existe.
+
+Los 12 ítems Parcial se documentaron como filas en la hoja **Brechas Identificadas**, con su riesgo y prioridad. Varias de estas brechas **no son hallazgos nuevos**, sino la traducción a lenguaje normativo de riesgos ya diagnosticados en talleres anteriores:
+- La brecha de cifrado en reposo y ausencia de backups retoma directamente el riesgo de infraestructura de bajo costo del **Taller 4**.
+- La brecha de logs de acceso retoma la amenaza T3 (Repudiation) del **Taller 5**.
+- La brecha de roles y permisos no diferenciados retoma la amenaza T6 (Elevation of Privilege) del **Taller 5**.
 
 ## Análisis del modelo propuesto
 
-El checklist entregado (`checklist-cliente.xlsx`) se estructura en dos hojas complementarias:
+### Cómo se estructura el modelo
+El checklist mantiene las 6 categorías de GobData por comparabilidad, pero el peso de la evaluación es inverso: en GobData 7 de 12 ítems están en Cumple; en Oasis, 12 de 13 están en Parcial. La hoja de Brechas Identificadas pasó de 5 filas (GobData) a 12 filas (Oasis).
 
-- **Checklist General**: 12 criterios de cumplimiento distribuidos en las categorías Consentimiento, Seguridad (ISO 27001), Protección de Datos, Prevención de Fugas, Retención, y Roles y Responsabilidades. De estos, 7 ítems están en estado Cumple y 5 en Parcial.
-- **Brechas Identificadas**: las 5 brechas derivadas de los ítems Parcial, con su riesgo y recomendación prioritaria. Dos de ellas (falta de plan de continuidad BCP/DRP y ausencia de controles DLP para exportaciones) quedaron catalogadas como riesgo Alto y prioridad Alta, por lo que deberían atenderse primero.
+### Cómo representa las necesidades del cliente
+Este resultado es coherente con la realidad de Oasis: es una empresa colombiana de 2 personas que, sin importar su tamaño, queda sujeta a la Ley 1581 de 2012 desde el primer cliente registrado — el mismo hallazgo que ya se estableció en la investigación complementaria del Taller 5 — pero que, a diferencia de GobData, no tiene los recursos ni la urgencia regulatoria de una entidad estatal para haber formalizado controles antes de tener siquiera un sistema construido.
 
-El modelo representa razonablemente las necesidades de un sistema estatal que procesa datos sensibles de ciudadanos: cubre tanto obligaciones legales directas (Ley 1581, derechos ARCO) como controles técnicos de seguridad de la información (ISO/IEC 27001). Se asumió que GobData ya cuenta con controles básicos de seguridad y protección de datos implementados parcial o totalmente (política de TI, DPO asignado, logs de auditoría), y que las brechas identificadas corresponden a procesos que existen pero no están completamente automatizados o formalizados, más que a ausencias totales de control.
+### Diferencias explícitas con el caso base (GobData)
 
+| Aspecto | GobData (caso base) | Oasis (cliente real) |
+|---|---|---|
+| Estado del sistema evaluado | En producción, con datos reales de ciudadanos | En diseño; el checklist evalúa preparación normativa, no auditoría de un sistema operando |
+| Proporción Cumple / Parcial | 7 Cumple / 5 Parcial (de 12) | 1 Cumple / 12 Parcial (de 13) |
+| Brechas identificadas | 5 | 12 |
+| Brecha de mayor riesgo | Ausencia de plan de continuidad (BCP/DRP) y de controles DLP | Cifrado en reposo no confirmado y ausencia de backups — ambas ya señaladas como riesgo Alto en el Taller 4 |
+| Figura de responsable de datos | DPO formal asignado (exigible por el volumen y sensibilidad de datos que maneja un ente estatal) | Sin DPO formal — no exigido para una microempresa, pero tampoco documentado quién asume el rol de facto |
+| Marco regulatorio adicional relevante | MinSalud/SuperSalud (por el historial clínico que procesa) | Ley 1480 de 2011 (Estatuto del Consumidor) y registro mercantil ante Cámara de Comercio, por ser un comercio electrónico dirigido a consumidor final |
 
-## Tabla de actores, entidades o componentes (si aplica)
+### Supuestos tomados
+- Se asumió que, al no existir un sistema desplegado, "Cumple" solo aplica a decisiones ya documentadas explícitamente en la arquitectura de los Talleres 3-4 (no a intenciones no formalizadas); todo lo demás se marcó Parcial, incluso cuando existe una práctica informal razonable (ej. el Propietario como responsable de facto del tratamiento).
+- Se asumió que, por ser una microempresa, no aplica exigir una figura formal de DPO (Ley 1581 no lo exige por tamaño), pero sí exige que exista un responsable identificable del tratamiento — de ahí que el ítem 7 se evalúe distinto a como se evaluaría en una entidad grande.
+- Se asumió que Oasis, al vender directamente a consumidores finales por canales digitales (o planear hacerlo), queda cobijada por el Estatuto del Consumidor (Ley 1480 de 2011), no solo por la Ley 1581.
+
+## Tabla de actores, entidades o componentes
 
 | Nombre del elemento | Tipo | Descripción | Responsable |
-|---------------------|------|-------------|-------------|
-| Ciudadano | Actor | Usuario que realiza trámites de identidad, salud, impuestos y derechos civiles en GobData | Cliente |
-| Oficial de Protección de Datos (DPO) | Actor | Responsable de supervisar el cumplimiento de la Ley 1581 dentro del sistema | Cliente |
-| Portal de Trámites Ciudadanos | Componente de aplicación | Sistema que procesa datos personales y sensibles de los ciudadanos | Cliente |
-| Mecanismo de revocatoria del consentimiento | Constraint (ArchiMate) | Restricción derivada de la Ley 1581 sobre el registro de usuario | Equipo del taller |
+|---|---|---|---|
+| Cliente | Actor | Titular de los datos personales tratados por el sistema | Cliente |
+| Propietario | Actor | Asume de facto el rol de responsable del tratamiento de datos | Equipo Oasis |
+| Sistema Oasis | Componente de aplicación | Sistema objetivo (App Web + API + Base de Datos) que procesará los datos personales | Equipo Oasis |
+| Mecanismo de revocatoria / derechos ARCO | Constraint (ArchiMate) | Restricción derivada de la Ley 1581 sobre el registro de solicitud del cliente | Equipo del taller |
 
 ## Investigación complementaria
 
 ### Tema investigado:
-Normativas sectoriales aplicables a un portal estatal de trámites ciudadanos, adicionales a la Ley 1581 e ISO/IEC 27001.
+Normativas sectoriales aplicables a un comercio electrónico de venta directa al consumidor en Colombia, adicionales a la Ley 1581.
 
 ### Resumen:
-Además del régimen general de protección de datos personales (Ley 1581 de 2012) y su decreto reglamentario (Decreto 1377 de 2013, que define el procedimiento para ejercer los derechos ARCO), un sistema como GobData que maneja historial clínico ciudadano debe considerar la normativa sectorial de salud vigilada por el Ministerio de Salud y la Superintendencia Nacional de Salud, dado que ese dato tiene tratamiento reforzado por tratarse de un dato sensible.
+A diferencia de GobData, cuya normativa sectorial relevante gira en torno a la salud (por el historial clínico que procesa), Oasis es un comercio electrónico de venta directa al consumidor, lo que la sujeta al **Estatuto del Consumidor (Ley 1480 de 2011)**. El artículo 50 de esta ley establece responsabilidades específicas para los proveedores de comercio electrónico, y la Superintendencia de Industria y Comercio (SIC) — la misma autoridad que vigila la Ley 1581 — es también quien vigila su cumplimiento, lo que convierte a la SIC en el punto de control regulatorio único para Oasis en ambos frentes.
 
-La Superintendencia de Industria y Comercio (SIC) es la autoridad nacional de protección de datos en Colombia: investiga y sanciona los incumplimientos de la Ley 1581, por lo que cualquier brecha relacionada con consentimiento, revocatoria o anonimización de datos (como las identificadas en este checklist) representa una exposición directa ante esa entidad. En un sistema estatal, además, suele aplicar la normativa del Ministerio de Tecnologías de la Información y las Comunicaciones (MinTIC) sobre gobierno digital y seguridad de la información en entidades públicas, lo cual refuerza la exigencia de una política formal de seguridad basada en ISO/IEC 27001.
+Además de la protección al consumidor, un comercio electrónico formal en Colombia debe contar con Registro Único Tributario (RUT) y registro mercantil ante la Cámara de Comercio, y dar cumplimiento a las obligaciones de IVA correspondientes — requisitos administrativos que no tienen relación con STRIDE ni con los talleres de arquitectura técnica previos, pero que sí son parte del "cumplimiento normativo" que pide este taller, y que conviene que el equipo tenga presente antes de que Oasis empiece a vender formalmente por un canal digital propio.
 
 ## Referencias
 
-Ver [`referencias.md`](referencias.md) para el listado completo de fuentes consultadas.
+Las referencias utilizadas y la información de investigación complementaria se encuentran registradas en `referencias.md`.
 
 ---
 
