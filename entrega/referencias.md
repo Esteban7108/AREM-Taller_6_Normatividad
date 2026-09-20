@@ -3,28 +3,26 @@
 Este archivo contiene las fuentes consultadas para el desarrollo del taller, tanto para el componente técnico como para la investigación complementaria.
 
 ## Taller
-[Taller 6 Normatividad](https://github.com/Esteban7108/AREM-Taller_6_Normatividad)
+Taller 6 - Checklist de Cumplimiento Normativo
+
+**Fecha:** 20/09/2026
+
+**Integrantes:** Esteban Díaz Vargas y Katherin Juliana Moreno Carvajal
 
 ---
 
 ## Referencias utilizadas
 
-1. Congreso de la República de Colombia. *Ley 1581 de 2012 - Régimen General de Protección de Datos Personales (Habeas Data)*. 2012.
-2. Presidencia de la República de Colombia. *Decreto 1377 de 2013 - Reglamentario de la Ley 1581, procedimiento para el ejercicio de los derechos ARCO*. 2013.
-3. Superintendencia de Industria y Comercio (SIC). "Protección de Datos Personales". Autoridad nacional de protección de datos en Colombia; investiga y sanciona incumplimientos de la Ley 1581.
+1. Congreso de la República de Colombia. *Ley 1581 de 2012 - Régimen General de Protección de Datos Personales (Habeas Data)*. Disponible en http://www.secretariasenado.gov.co/senado/basedoc/ley_1581_2012.html . Fecha de consulta: 20/09/2026.
+
+2. Congreso de la República de Colombia. *Ley 1480 de 2011 - Estatuto del Consumidor*, artículo 50 (responsabilidades de los proveedores de comercio electrónico). Disponible en https://relatoria.colombiacompra.gov.co/normativa/ley-1480-de-2011/ . Fecha de consulta: 20/09/2026.
+
+3. DPL News. *Cinco requisitos legales que hay que cumplir para vender adecuadamente por Internet en Colombia* (RUT, registro mercantil ante Cámara de Comercio, Estatuto del Consumidor, protección de datos). Disponible en https://dplnews.com/?p=98992 . Fecha de consulta: 20/09/2026.
+
 4. International Organization for Standardization (ISO). *ISO/IEC 27001 - Gestión de la Seguridad de la Información*.
-5. Archivo General de la Nación. *Ley General de Archivos (Ley 594 de 2000)* — referenciada como base de la política de retención de GobData.
-6. Ministerio de Tecnologías de la Información y las Comunicaciones (MinTIC). Normativa de gobierno digital y seguridad de la información para entidades públicas.
-7. Guía Paso a Paso: Checklist de Cumplimiento Normativo. Material del Taller 6, curso AREM, Universidad de La Sabana.
+
+5. Universidad de La Sabana. *Guía Paso a Paso: Checklist de Cumplimiento Normativo* - Taller 6, curso Arquitectura Empresarial. 2026.
 
 ---
 
-## Recomendaciones
-
-- Usa formato APA o IEEE para citar.
-- No incluyas fuentes como Wikipedia si hay mejores alternativas.
-- Si usas inteligencia artificial para redactar o investigar, cítalo como "Fuente asistida por IA: ChatGPT, julio 2025".
-
----
-
-_Este archivo forma parte de la entrega académica del curso AREM - Universidad de La Sabana._
+_Este archivo forma parte de la entrega académica del Taller 6 del curso AREM - Universidad de La Sabana._
